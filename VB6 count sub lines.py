@@ -10,17 +10,17 @@ with open('linecount.csv', 'wt') as out_file:                   #open output fil
     iStringTot=0                                                #string count total
     for filename in glob.glob(os.path.join(path, '*.*')):       #loop through all files in cur dir
         try:
-            lFileTypeSkip = ['.py', 'dsr', 'dsx','frx','csv']         #skip file extensions
+            lFileTypeSkip = ['.py', 'dsr', 'dsx','frx','csv']   #skip file extensions
             #if filename[-3:].lower()=='.py' or filename[-3:].lower()=='dsr' or filename[-3:].lower()=='dsx' or filename[-3:].lower()=='frx':
             if any(x in filename[-3:].lower() for x in lFileTypeSkip): 
                 continue                                        #skip file
             out_file.write(filename+'\n')                       #write filename to output
             iLineCur=0                                          #line cur
             iLineStart=0                                        #line start
-            iLineLen=0                                          #line length
-            iLineLenFil=0                                       #line length cumulative
             
             iStringFil=0                                        #string count in file
+            iLineLen=0                                          #line length
+            iLineLenFil=0                                       #line length cumulative
             sStringName=''                                      #string name
             lStringStart = ['Private Function', 'Public Function', 'Private Sub','Public Sub']  #string matches to begin counting
             lStringEnd   = ['End Function', 'End Sub']                                          #string matches to end counting
@@ -34,15 +34,15 @@ with open('linecount.csv', 'wt') as out_file:                   #open output fil
                     if iLineStart !=0 and line.startswith(tuple(lStringEnd)):    
                         iLineLen=iLineCur-iLineStart+1          #+1 for inclusive
                         iStringFil+=1                           #inc string count by 1
-                        iLineLenFil+=iLineLen                   #store line num
+                        iLineLenFil+=iLineLen                   #string line length for file
                         out_file.write(',' + str(iLineStart) + ',' + str(iLineCur) + ',' + str(iLineLen)+','+sStringName +'\n')
                         iLineStart=0                            #reset start line num
                 if(iLineCur!=0 and iLineLenFil!=0 and iStringFil!=0):
                     out_file.write('Total:,,'+ str(iLineCur) +','+str(iLineLenFil)+','+str(iStringFil)+ ','+str(iLineLenFil/iStringFil)+'\n')
                     iFileTot+=1                                 #inc file total by 1
-                    iLineTot+=iLineCur
-                    iStringTot+=iStringFil
-                    iLineLenTot+=iLineLenFil
+                    iLineTot+=iLineCur                          #line count for all files
+                    iStringTot+=iStringFil                      #string count for all files
+                    iLineLenTot+=iLineLenFil                    #string line length for all files
         except UnicodeDecodeError:                              #could not read file so skip it
             continue
     if(iFileTot!=0):
@@ -50,7 +50,7 @@ with open('linecount.csv', 'wt') as out_file:                   #open output fil
         out_file.write(',,Tot lines,Tot length,Tot sub,ave len/sub\n')       #write headings to output
         out_file.write(',,'+ str(iLineTot)+','+str(iLineLenTot)+','+str(iStringTot) +','+str(iLineLenTot/iStringTot)+',\n')
         out_file.write('\n')
-        out_file.write('File Total,,lines/file,line length/file,sub/file\n')       #write headings to output
+        out_file.write('File Total,,lines/file,line length/file,sub/file\n') #write headings to output
         out_file.write(str(iFileTot)+',,'+ str(iLineTot/iFileTot)+','+str(iLineLenTot/iFileTot)+','+str(iStringTot/iFileTot) +',\n')
 print('\n')
 print('done')
