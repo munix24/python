@@ -1,3 +1,4 @@
+#https://discuss.leetcode.com/topic/31565/the-longest-absolute-path-in-file-system
 # Basic graph node class for this problem
 class GraphNode(object):
     def __init__(self, string):
