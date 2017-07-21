@@ -5,6 +5,12 @@ import cProfile
 f=math.factorial
 
 def nCr(n, k):
+    if k > n:
+        return 0
+    if k==0 or n==k:
+        return 1
+    if k==1 or k==n-1:
+        return n
     return f(n)//f(k)//f(n-k)
 
 def pascal(n):
