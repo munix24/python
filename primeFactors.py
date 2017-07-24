@@ -1,4 +1,5 @@
 import cProfile
+from functools import reduce
 
 def primeFactors(n):
     fact = []
@@ -32,6 +33,10 @@ def primeFactorsGenerator(n):   #about the same run time
     if n > 1:
         yield i
 
+def factors(n):     
+    step = 2 if n%2 else 1       
+    return set(reduce(list.__add__,([i, n//i] for i in range(1, int(n**0.5) + 1, step) if n % i == 0)))   
+        
 #n=100000000000000000000000000000000000000
 #n=735734573573498646511235123
 #print(len(str(n)))
