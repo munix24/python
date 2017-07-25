@@ -3,15 +3,24 @@ import math
 import cProfile
 
 f=math.factorial
+mem_choose = {}
 
 def nCr(n, k):
-    if k > n:
-        return 0
-    if k==0 or n==k:
-        return 1
-    if k==1 or k==n-1:
-        return n
-    return f(n)//f(k)//f(n-k)
+    """
+    N choose K
+    """
+    key = (n, k)
+    if key not in mem_choose:
+        if k > n:
+            c = 0
+        elif k==0 or n==k:
+            c = 1
+        elif k==1 or k==n-1:
+            c = n
+        else:
+            c = factorial(n)//factorial(k)//factorial(n-k)
+        mem_choose[key] = c
+    return mem_choose[key]
 
 def pascal(n):
     if n == 1:
