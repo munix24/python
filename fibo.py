@@ -1,7 +1,4 @@
-#https://www.codechef.com/problems/FCTRL2
 import cProfile
-import operator
-import math
 
 def fib(n):
     if n == 0:
@@ -23,6 +20,5 @@ def fibi(n):
         a, b = b, a + b
     return a
 
-#cProfile.run("factRecursion(1000)")
+#cProfile.run("fibm(1000)")
 print(fibm(5))
-input()
