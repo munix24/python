@@ -1,3 +1,7 @@
+#TODO take file / dir as input
+#https://stackoverflow.com/questions/10377998/how-can-i-iterate-over-files-in-a-given-directory
+#https://stackoverflow.com/questions/3204782/how-to-check-if-a-file-is-a-directory-or-regular-file-in-python
+
 import os, glob
 path='./'                                                       #'./'for cur dir
 #listing = os.listdir(path)                                     #another dir method
