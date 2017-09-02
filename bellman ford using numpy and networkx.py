@@ -3,7 +3,7 @@ import numpy as np
 
 def bellman_ford(graph, start_node):
     """
-    return predecessors and shortest path lengths on shortest paths in weighted graphs
+    return predecessors and shortest path lengths on shortest path in weighted graph
     https://networkx.github.io/documentation/networkx-1.9/reference/generated/networkx.algorithms.shortest_paths.weighted.bellman_ford.html
     """
     A = np.array(graph)
@@ -12,7 +12,7 @@ def bellman_ford(graph, start_node):
     try:
         predescesor, distance = nx.bellman_ford(G, start_node)
     except:
-        #if there is a negative cycle then return all bunnies
+        #if there is a negative cycle then return all nodes
         return [x for x in range(len(graph)-2)]
     return predescesor, distance
 
