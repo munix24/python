@@ -1,3 +1,5 @@
+mem = {}
+
 def permute(lst):
     """
     recursively generate sorted list of all possible permutations of lst
@@ -19,11 +21,8 @@ def permute(lst):
 
 def permute2(lst):
     """
-    recursively generate list of all possible permutations of lst. Returned list is out of sort.
-    permute([2,3]): permute([3]) yields [3], insert 2 before and after 3 and yield [2,3], [3,2]
-    permute([1,2,3]): permute([2,3]): yields [2,3], [3,2] (see above)
-    permute([1,2,3]): insert 1 at every position of [2,3] yielding [1, 2, 3], [2, 1, 3], [2, 3, 1]
-    permute([1,2,3]): insert 1 at every position of [3,2] yielding [1, 3, 2], [3, 1, 2], [3, 2, 1]
+    recursively generate sorted list of all possible permutations of lst
+    Same as permute() except doesn't return sorted
     """
     if len(lst) <=1:
         yield lst
@@ -35,9 +34,33 @@ def permute2(lst):
                 # Insert the first element into every position of permutation
                 # equivalent to return perm.insert(i, lst[0])
                 yield perm[:i] + [lst[0]] + perm[i:]
+
+def permute_mem(lst):
+    """
+    recursively return sorted list of all possible permutations of lst.
+    Same as permute() except Uses dict to memoize. Not plausible for large data sets (range(11)) due to memory constraint
+    """
+    if len(lst) <= 1:
+        return [lst]
+    elif tuple(lst) in mem:
+        return mem[tuple(lst)]
+    else:
+        l = []
+        # choose an element in lst
+        for i in range(len(lst)):
+           # permute the list excluding the chosen element
+           for perm in permute_mem(lst[:i] + lst[i+1:]):
+               # Insert chosen element into first position of permutation
+               l.append([lst[i]] + perm)
+        # add to memoization
+        mem[tuple(lst)] = l
+        return l
                 
-for a in permute(range(2,4)):
-    print(a)
+#for a in permute(range(4)):
+#    print(a)
     
-#for a in permute2(range(1,4)):
+#for a in permute2(range(4)):
+#    print(a)
+    
+#for a in permute_mem(range(4)):
 #    print(a)
