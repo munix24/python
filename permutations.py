@@ -1,5 +1,12 @@
+import itertools
 mem = {}
 
+#itertools.permutations code
+#https://docs.python.org/2/library/itertools.html#itertools.permutations
+
+def perm(lst, r):
+    return itertools.permutations(lst, r)
+    
 def permute(lst):
     """
     recursively generate sorted list of all possible permutations of lst
