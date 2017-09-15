@@ -1,4 +1,5 @@
 #http://www.investopedia.com/university/movingaverage/movingaverages1.asp
+#https://en.wikipedia.org/wiki/Moving_average
 
 def average(data):
     '''return the average of a list of numbers'''
@@ -26,7 +27,11 @@ def EMA(data, alpha):
         return alpha * data[-1] + (1 - alpha) * EMA(data[:-1], alpha)
 
 def moving_exponential_moving_average(data, period, alpha):
-    '''return the moving_exponential_moving_average for a list of numbers, period, and alpha'''
+    '''
+	return the moving_exponential_moving_average for a list of numbers, period, and alpha.
+	
+	The exponential moving average is a type of moving average that gives more weight to recent prices in an attempt to make it more responsive to new information
+	'''
     if period > len(data) or len(data) < 1:
         return 0
     period -= 1
@@ -39,7 +44,8 @@ def moving_exponential_moving_average(data, period, alpha):
 
 data = [7, 8, 9, 10, 9, 8, 7, 9, 11, 13, 15, 17,
         16, 15, 14, 13, 12, 11, 10, 9, 7, 5, 3, 1]
-period = 6
+period = 3
+##alpha = 2 / (1 + period)
 alpha = .6
 
 ##print(moving_average(data, period))
