@@ -1,5 +1,7 @@
 #http://www.investopedia.com/university/movingaverage/movingaverages1.asp
 #https://en.wikipedia.org/wiki/Moving_average
+import pandas as pd
+import numpy as np
 
 def average(data):
     '''return the average of a list of numbers'''
@@ -41,6 +43,10 @@ def moving_exponential_moving_average(data, period, alpha):
         ema[i] = EMA(data[i - period : i + 1], alpha)
 
     return ema
+
+def panda_ema(values, period):
+    values = np.array(values)
+    return pd.ewma(values, span=period)[-1]
 
 data = [7, 8, 9, 10, 9, 8, 7, 9, 11, 13, 15, 17,
         16, 15, 14, 13, 12, 11, 10, 9, 7, 5, 3, 1]
