@@ -8,6 +8,11 @@ def factors(n):
     step = 2 if n%2 else 1       
     return set(reduce(list.__add__,([i, n//i] for i in range(1, int(n**0.5) + 1, step) if n % i == 0)))  
 
+def factors_less_n(n):    
+    fac = list(factors(n))    
+    fac.remove(n)
+    return fac
+
 def primeFactors(n):
     '''
             Returns list of primes that divide n 
