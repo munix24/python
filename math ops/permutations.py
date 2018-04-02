@@ -1,4 +1,5 @@
 import itertools
+import math
 mem = {}
 
 #itertools.permutations code
@@ -62,6 +63,39 @@ def permute_mem(lst):
         # add to memoization
         mem[tuple(lst)] = l
         return l
+
+def lexinographic_permutation(let, n):
+    '''
+    returns nth lexinographic permutation of string, 'let'
+    using Factorial number system given that items in 'let' are sorted
+    '''
+    n -= 1
+    letters = list(let)
+    ret = []
+    for i in range(len(letters) - 1, 0, -1):
+        fact = math.factorial(i)
+        idx = n // fact
+##        print(letters)
+##        print(n)
+##        print(fact)
+##        print(idx)
+##        print(letters[idx])
+        n %= fact
+        ret.append(letters.pop(idx))
+##        print(ret)
+    ret.append(letters.pop(0))
+    return ''.join(ret)
+
+def nth_permutation(n):
+    '''
+    returns nth lexinographic permutation of string, 'let'
+    by iterating through all items
+    '''
+    i = 1
+    for p in itertools.permutations(word):
+        if i == n:
+            return ''.join(p)
+        i += 1
                 
 #for a in permute(range(4)):
 #    print(a)
