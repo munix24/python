@@ -48,15 +48,23 @@ def pad_bits(bits, pad = 8):
     assert len(bits) <= pad
     return [0] * (pad - len(bits)) + bits
 
-def int2bin(n):
+def int_to_bin(n):
     """converts integer to bit list"""
     result = []
     if n == 0:
         return [0]
     while n > 0:
-        result = [(n % 2)] + result
-        n = n / 2
+        result = [n % 2] + result
+        n = n // 2
     return result
+
+def int_to_bin_rec(n):
+    """converts integer to bit list using recursion"""
+    if n == 0:
+        return [0]
+    if n == 1:
+        return [1]
+    return int_to_bin_rec(n // 2) + [n % 2]
 
 ##print(chr2bin('c'))
 
