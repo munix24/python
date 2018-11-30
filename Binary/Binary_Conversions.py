@@ -61,9 +61,7 @@ def int_to_bin(n):
 def int_to_bin_rec(n):
     """converts integer to bit list using recursion"""
     if n == 0:
-        return [0]
-    if n == 1:
-        return [1]
+        return []
     return int_to_bin_rec(n // 2) + [n % 2]
 
 ##print(chr2bin('c'))
