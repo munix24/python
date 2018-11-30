@@ -109,6 +109,27 @@ def bitlist_to_int(bitlist, base):
         ret += bitlist[bitlist_len - 1 - i] * base ** i
     return ret
 
+def binlist_to_dec(binlist):
+    '''
+    converts binary list of bits to decimal
+    example: binlist_to_int([0, 1, 1, 0, 0, 1]) = .390625
+    '''
+    return bitlist_to_dec(binlist, 2)
+    
+def bitlist_to_dec(bitlist, base):
+    '''
+    converts binary list of bits of base to decimal
+    example: binlist_to_int([0, 1, 1, 0, 0, 1], 2) = .390625
+    '''
+    ret = 0
+    bitlist_len = len(bitlist)
+    for i in range(bitlist_len):
+        a = bitlist[bitlist_len - 1 - i]
+        b = base ** (-i - 1)
+        ret += bitlist[i] * base ** (-i - 1)
+        print(a,b, ret)
+    return ret
+
 ##print(chr2bin('c'))
 
 ##print((str2bin('cc')))
