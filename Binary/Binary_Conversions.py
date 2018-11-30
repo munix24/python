@@ -50,8 +50,8 @@ def pad_bits(bits, pad = 8):
     assert len(bits) <= pad
     return [0] * (pad - len(bits)) + bits
 
-def int_2_bin(n):
-    """converts integer to bit list"""
+def int_2_binlist(n):
+    """converts integer to binary list"""
     result = []
     if n == 0:
         return [0]
@@ -60,13 +60,13 @@ def int_2_bin(n):
         n = n // 2
     return result
 
-def int_2_bin_rec(n):
-    """converts integer to bit list using recursion"""
+def int_2_binlist_rec(n):
+    """converts integer to binary list using recursion"""
     if n == 0:
         return []
     return int_to_bin_rec(n // 2) + [n % 2]
 
-def dec_to_base_rec(n, base):
+def dec_to_baselist_rec(n, base):
     '''
     converts decimal to bit list in input base using recursion
     example: dec_to_base_rec(.390625, 2) = [0, 1, 1, 0, 0, 1]
@@ -81,7 +81,7 @@ def dec_to_base_rec(n, base):
     # left of decimal + dec_to_bin_rec(right of decimal)
     return [int(n2 // 1)] + dec_to_bin_rec(n2 % 1) 
 
-def dec_to_bin_rec(n):
+def dec_to_binlist_rec(n):
     '''
     converts decimal to bit list in base 2 using recursion
     example: dec_to_bin_rec(.390625) = [0, 1, 1, 0, 0, 1]
@@ -89,7 +89,25 @@ def dec_to_bin_rec(n):
     -2, -3, and -6 bits are present so calculation is:
     2 ** -2 + 2 ** -3 + 2 ** -6 = .390625
     '''
-    return dec_to_base_rec(n, 2)
+    return dec_to_baselist_rec(n, 2)
+
+def binlist_to_int(binlist):
+    '''
+    converts binary list of bits to integer
+    example: binlist_to_int([1,1,1]) = 7
+    '''
+    return bitlist_to_int(binlist, 2)
+    
+def bitlist_to_int(bitlist, base):
+    '''
+    converts binary list of bits of base to integer
+    example: binlist_to_int([1,1,1], 2) = 7
+    '''
+    ret = 0
+    bitlist_len = len(bitlist)
+    for i in range(bitlist_len):
+        ret += bitlist[bitlist_len - 1 - i] * base ** i
+    return ret
 
 ##print(chr2bin('c'))
 
