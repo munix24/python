@@ -6,6 +6,10 @@ mem = {}
 #https://docs.python.org/2/library/itertools.html#itertools.permutations
 
 def perm(lst, r):
+    '''Return successive r length permutations of elements in the iterable.
+
+    If r is not specified or is None, then r defaults to the length of the iterable 
+    and all possible full-length permutations are generated.'''
     return itertools.permutations(lst, r)
     
 def permute(lst):
