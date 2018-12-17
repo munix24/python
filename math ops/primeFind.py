@@ -13,15 +13,15 @@ def primes_sieve(limit):    #most efficient for limit<10mil
         i=i+1
     return primes
 
-def listPrimes(limit):    #most efficient for limit<10mil
-    listPrimes=[]
-    for prime, value in enumerate(primes_sieve(limit)):
-        if value:
-            listPrimes.append(prime)
-    return listPrimes
+def yield_Primes(limit):    #most efficient for limit<10mil
+    primes = primes_sieve(limit)
+    for i in range(limit):
+        if primes[i]:
+            yield i
 
-def printPrimes(limit):
-    print(primes_sieve(limit))
+def list_Primes(limit):    #most efficient for limit<10mil
+    listPrimes = [i for i in yield_Primes(limit)]
+    return listPrimes
 
 def nthPrime(n,limit):
     primes=primes_sieve(limit)
