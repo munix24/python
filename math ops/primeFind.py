@@ -4,20 +4,12 @@ def primes_sieve(limit):    #most efficient for limit<10mil
     primeList=[]
     primes = [True] * (limit)
     primes[0] = primes[1] = False
-    i=2
 
-    while(i<limit):
-        if primes[i]:         #return prime and only loop primes
+    for i in range(2, limit):
+        if primes[i]:         #only loop primes
             for n in range(i*i, limit, i):
                 primes[n] = False
-        i=i+1
     return primes
-
-def yield_Primes(limit):    #most efficient for limit<10mil
-    primes = primes_sieve(limit)
-    for i in range(limit):
-        if primes[i]:
-            yield i
 
 def list_Primes(limit):    #most efficient for limit<10mil
     listPrimes = [i for i in yield_Primes(limit)]
