@@ -1,7 +1,6 @@
 import cProfile
 
-def primes_sieve(limit):    #most efficient for limit<10mil
-    primeList=[]
+def primes_sieve(limit):    #most efficient for limit < 10mil
     primes = [True] * (limit)
     primes[0] = primes[1] = False
 
@@ -11,8 +10,9 @@ def primes_sieve(limit):    #most efficient for limit<10mil
                 primes[n] = False
     return primes
 
-def list_Primes(limit):    #most efficient for limit<10mil
-    listPrimes = [i for i in yield_Primes(limit)]
+def list_primes(limit):    #most efficient for limit < 10mil
+    primes = primes_sieve(limit)
+    listPrimes = [i for i in range(len(primes)) if primes[i]]
     return listPrimes
 
 def nthPrime(n,limit):
