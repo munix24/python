@@ -10,9 +10,14 @@ def primes_sieve(limit):    #most efficient for limit < 10mil
                 primes[n] = False
     return primes
 
-def list_primes(limit):    #most efficient for limit < 10mil
+def primes_list(limit):    #most efficient for limit < 10mil
     primes = primes_sieve(limit)
     listPrimes = [i for i in range(len(primes)) if primes[i]]
+    return listPrimes
+
+def primes_set(limit):    #most efficient for limit < 10mil
+    primes = primes_sieve(limit)
+    listPrimes = {i for i in range(len(primes)) if primes[i]}
     return listPrimes
 
 def nthPrime(n,limit):
