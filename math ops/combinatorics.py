@@ -2,7 +2,7 @@
 import math
 import cProfile
 
-f=math.factorial
+factorial=math.factorial
 mem_choose = {}
 
 def nCr(n, k):
