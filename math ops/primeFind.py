@@ -61,3 +61,6 @@ n=1000001
 #print(primes[10001-1])
 #cProfile.run("nthPrime(100001,100000000)")
 #cProfile.run("notSieve(n)")
+#cProfile.run("primes_sieve(10000000)")		#3.6s
+#cProfile.run("primes_sieve(100000000)")	#36s
+#cProfile.run("primes_sieve(1000000000)")	#360s
