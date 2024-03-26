@@ -29,3 +29,11 @@ class Champ:
 
     def is_defeated(self):
         return self.hp <= 0
+
+    def reset(self):
+        self.hp=self.maxhp
+        self.attack_cd=0
+
+    def print_stats(self):
+        print(self.name)
+        

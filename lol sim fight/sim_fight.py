@@ -24,8 +24,11 @@ def sim_fight(champ1, champ2, print_actions=0):
 
 ##print(vars(champ2))
 if __name__ == "__main__":
-    champ1 = Champ(name="Orianna", level=1)
-    champ2 = Champ(name="Yuumi", level=1)
+    champ1 = Champ(name="Annie", level=1)
+    champ2 = Champ(name="Anivia", level=1)
+
+##    print(champ1.stats)
+##    print(champ2.stats)
 
     start_time = time.time()
     winner = sim_fight(champ1, champ2, 1)
