@@ -1,6 +1,6 @@
 import json
 import pandas as pd
-from urllib.request import urlopen
+import urllib.request
 ##import requests
 
 pd.set_option('display.max_columns', 14)
@@ -14,9 +14,11 @@ champion_names = data['keys'].values()
 url = 'https://raw.communitydragon.org/latest/game/data/characters/'
 
 for champion in champion_names:
-    champion_url = url + champion + '/' + champion + '.bin.json'
+    champion_url = url + champion.lower() + '/' + champion.lower() + '.bin.json'
     print(champion_url)
-    response = urlopen(champion_url)
+    hdr = {'User-Agent':'Mozilla/5.0'}
+    req = urllib.request.Request(champion_url, headers=hdr)
+    response = urllib.request.urlopen(req)
 ##    source = requests.get(champion_url).json()
 ##    print(source)
     data_json = json.loads(response.read()) 
