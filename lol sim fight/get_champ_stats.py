@@ -21,6 +21,7 @@ for champion in champion_data.values():
     
 df = pd.DataFrame(table_data)
 df.set_index('name', inplace=True)     # Set Champion Name as index
+print(df)
 
 def get_champ_stats(champ):
     return df.loc[champ]
@@ -28,9 +29,9 @@ def get_champ_stats(champ):
 def get_champs():
     return data['data'].keys()
 
-if __name__ == "__main__":
+##if __name__ == "__main__":
     ##print(table_data)
 ##    print(df)
-    print(df.loc["Aatrox"])
+##    print(df.loc["Aatrox"])
     ##print(get_champ_stats('Aatrox'))
 
