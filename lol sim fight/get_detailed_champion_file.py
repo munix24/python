@@ -13,17 +13,44 @@ champion_names = data['keys'].values()
 
 url = 'https://raw.communitydragon.org/latest/game/data/characters/'
 
+champions_detailed_data={}
+spells=('Q', 'W', 'E', 'R')
+
+# with open('championDetailed2.json', encoding='utf-8') as f:
+#     data_json = json.load(f)
+
+def JSON_key_contains_value_recursive(json_input, lookup_value):
+    if isinstance(json_input, dict):
+        for k, v in json_input.items():
+            if JSON_key_contains_value_recursive(v, lookup_value):      #keeps iterating until it finds a match
+                return True
+    elif isinstance(json_input, list):
+        for item in json_input:
+            if JSON_key_contains_value_recursive(item, lookup_value):      #keeps iterating until it finds a match
+                return True
+    elif isinstance(json_input, str):
+        if lookup_value.lower() in json_input.lower():
+            return True
+    return False
+
 for champion in champion_names:
+    champions_detailed_data[champion]={}
+##    print(champions_detailed_data)
     champion_url = url + champion.lower() + '/' + champion.lower() + '.bin.json'
     print(champion_url)
     hdr = {'User-Agent':'Mozilla/5.0'}
     req = urllib.request.Request(champion_url, headers=hdr)
     response = urllib.request.urlopen(req)
-##    source = requests.get(champion_url).json()
-##    print(source)
-    data_json = json.loads(response.read()) 
-    print(data_json)
-    exit()
+    data_json = json.loads(response.read())
+    
+    for k, v  in data_json.items():
+        if '{' in k:
+            continue
+        if JSON_key_contains_value_recursive(v, 'BaseDamage'): # or JSON_key_contains_value_recursive(v, 'Ratio'):
+            champions_detailed_data[champion][k]=v
+            
+with open("championDetailed3.json", "w") as outfile:
+    outfile.write(json.dumps(champions_detailed_data))
 
     
 
