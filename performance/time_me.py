@@ -1,9 +1,20 @@
 import time
 import timeit
 
+# @time_it
 def test():
     L = [i for i in range(10000)]
     return L
+
+# @time_it before function definition to call decorator 
+def time_it(func):
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"Function '{func.__name__}' took {end - start:.6f} seconds to run.")
+        return result
+    return wrapper
 
 def time_me(func, numbers = 1000, repeat = 3, *args):
     '''Not as precise for small operations due to other bg prc'''
